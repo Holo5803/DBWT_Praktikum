@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--
+    - Praktikum DBWT. Autoren:
+    - Andreas, Hüpgen, 3679869
+    - Viet Minh Duc, Nguyen, 3659300
+    -->
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Übung</title>
+    <style>
+
+        main {
+            margin: auto;
+        }
+
+        h1 {
+            font-family: Arial, SansSerif;
+            text-align: left;
+        }
+
+        h1::first-letter {
+            font-size: 80px;
+        }
+
+        p {
+            text-align: left;
+            font-family: Arial, SansSerif;
+        }
+        a{
+            text-decoration: none;
+            font-family: Arial, SansSerif;
+            font-weight: bold;
+            color: #E4AE8A;
+        }
+
+        .center {
+            font-family: Arial, SansSerif;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            font-family: Arial, SansSerif;
+            text-align: right;
+            border-top: 2px solid #E4AE8A;
+        }
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        footer li{
+            display: inline;
+            padding: 0px 20px;
+            margin: 0px;
+        }
+        footer li:nth-child(3){
+            border-left: 2px solid #E4AE8A;
+            border-right: 2px solid #E4AE8A;
+        }
+        footer li:nth-child(2){
+            border-left: 2px solid #E4AE8A;
+        }
+
+
+
+
+        /*Tabelle*/
+        #etabelle {
+            font-family: Arial, SansSerif;
+            text-align: left;
+            border-collapse: separate;
+            border-spacing: 0px;
+            margin: auto;
+        }
+
+        #etabelle {
+            padding: 2px;
+            border: 2px solid #E4AE8A;
+        }
+
+        #etabelle th {
+            background-color: #FAEBD6;
+            font-weight: bold;
+        }
+        #etabelle th:nth-child(2){
+            border-left: 3px solid white;
+            border-right: 3px solid white;
+        }
+        #etabelle tr:nth-child(2) {
+            background-color: #FAEBD6;
+        }
+        #etabelle td:nth-child(2) {
+           border-left: 3px solid white;
+           border-right: 3px solid white;
+           width: 150px;
+        }
+        #etabelle td:nth-child(3) {
+            width: 400px;
+        }
+
+        #etabelle tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        #etabelle li {
+            margin-top: 15px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<main>
+    <div class="elektro zeile">
+        <h1 id="elektro">Wofür steht das E in E-Mensa?</h1>
+        <p>Am besten zeigt man das in einer <a href="#etabelle">Tabelle</a>.</p>
+        <table id="etabelle">
+            <thead>
+            <tr>
+                <th>Bedeutung</th>
+                <th>Philosophie</th>
+                <th>Beispiele</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Elektro</td>
+                <td>Alles geht elektronisch</td>
+                <td>
+                    <ol>
+                        <li class="pflicht">Bestellung digital</li>
+                        <li class="pflicht">Bezahlen digital</li>
+                        <li>Essen digital</li>
+                        <li>Spülen digital</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <td>Extravagant</td>
+                <td>Es gibt auch Ausgefallenes</td>
+                <td><p>Wir sind die einzige Mensa weit und breit mit </p>
+                    <ol>
+                        <li class="pflicht">Vanillesauerkraut</li>
+                        <li class="pflicht">Bohnensenfbrot</li>
+                        <li>Habaneroeiscreme</li>
+                        <li>Bananengulasch</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <td>Effizient</td>
+                <td>Schnell, lecker und qualitativ</td>
+                <td>
+                    <ol>
+                        <li class="pflicht">Frisch für Sie zubereitet, wann Sie es wollen</li>
+                        <li class="pflicht">Die Zutaten sind nachverfolgbar und immer tiefgekühlt</li>
+                        <li>Wir haben auch Samstags geöffnet. Sie sehen, wie effizient wir sind.</li>
+                    </ol>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p class="center">Da geht natürlich noch viel mehr, siehe nur <abbr title="Extra">E</abbr>.<br>Die Tabelle ist
+            aber schon ganz schön imposant so oder?</p>
+    </div>
+</main>
+<footer>
+    <ul>
+        <li>(c) DBWT</li>
+        <li>Hilfe</li>
+        <li>Datenschutz</li>
+        <li>Impressum</li>
+    </ul>
+</footer>
+</body>
+</html>

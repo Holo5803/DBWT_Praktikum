@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+    - Praktikum DBWT. Autoren:
+    - Andreas, Hüpgen, 3679869
+    - Viet Minh Duc, Nguyen, 3659300
+    -->
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>layout</title>
+    <style>
+        .container {
+            display: grid;
+            gap:20px;
+            margin-bottom: 40px;
+            border: 1px solid black;
+        }
+
+        .grid-untereinander {
+            grid-template-rows: auto auto auto;
+        }
+
+        .grid-nebeneinander {
+            grid-template-columns: auto auto auto;
+            gap: 5px;
+        }
+
+        .grid-zentriert {
+            justify-content: center;
+
+        }
+        .element {
+            background-color: bisque;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Grid Layout</h1>
+
+    <h2>Drei Elemente untereinander</h2>
+    <div class ="container grid-untereinander">
+        <div class ="element">Element1</div>
+        <div class ="element">Element2</div>
+        <div class ="element">Element3</div>
+
+    </div>
+
+    <h2>Drei Elemente nebeneinander</h2>
+    <div class ="container grid-nebeneinander">
+        <div class ="element">Element links</div>
+        <div class ="element">Element mittel</div>
+        <div class ="element">Element rechts</div>
+    </div>
+
+    <h2>Zentriertes Element</h2>
+    <div class = "container grid-zentriert">
+        <div class ="element">Element zentriert</div>
+    </div>
+</body>
+</html>
+

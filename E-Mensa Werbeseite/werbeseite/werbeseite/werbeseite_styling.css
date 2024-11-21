@@ -1,0 +1,156 @@
+main {
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    display: flex;
+    background-color: #FAEBD6 ;
+    flex-direction: column;
+    margin: 100px 100px;
+    font-family: Arial, SansSerif;
+
+}
+
+
+header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+header li {
+    float: right;
+    position: sticky;
+}
+
+header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+header li a:hover {
+    background-color: #111;
+}
+
+
+
+
+/*-------------------------------------------------*/
+#main-menu {
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+footer {
+    font-family: Arial, SansSerif;
+    text-align: center;
+    border-top: 2px solid #E4AE8A;
+}
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+footer li{
+    display: inline;
+    padding: 0px 20px;
+    margin: 0px;
+}
+footer a{
+    text-decoration: none;
+    font-family: Arial, SansSerif;
+    font-weight: bold;
+    color: rosybrown;
+
+}
+footer li:nth-child(2){
+    border-left: 2px solid #E4AE8A;
+    border-right: 2px solid #E4AE8A;
+}
+
+
+.ankuedigung p {
+    border: 1px solid black;
+    padding: 4px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#meinetabelle {
+    table-layout: auto;
+}
+table td{
+    text-align: center;
+}
+.zahlen li {
+    font-weight: bold;
+    display: inline;
+    padding: 0px 10px;
+    margin: 0px;
+}
+.formular {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.formular>* {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.formular div {
+    margin-top: 10px;
+}
+
+.checkbox{
+    display: inline-flex;
+    gap: 10px;
+}
+.submit {
+    margin-left: 50px;
+}
+.wichtig li {
+    justify-content: center;
+    display: inline;
+    font-weight: bold;
+    padding: 20px;
+    font-style: italic;
+}
+#foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 900px; /* Adjust as needed */
+    height: auto;
+    margin: 0 auto; /* Center alignment */
+
+}
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+body {
+    margin: 0;
+    background-image: url("mensafoto 3.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+}
