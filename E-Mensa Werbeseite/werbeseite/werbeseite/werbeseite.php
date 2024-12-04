@@ -1,7 +1,12 @@
 <?php
+
+//Session dient zum Zählern Neuladen
 session_start();
+
+//GLobale Variablen zuweisen
 global $meal;
 global $confirmationMessage;
+
 if (!isset($_SESSION['anmeldung'])) {
     $_SESSION['anmeldung'] = 0;
 }
@@ -21,9 +26,7 @@ if ($verbindung->connect_error) {
 //Besucher zählen
 $sql = "INSERT INTO besucher () VALUES ()";
 $verbindung->query($sql);
-//    $_SESSION['aufrufen'] = 0;
 
-//$_SESSION['aufrufen']++;
 
 // Neuer Besucherzähler
 $sql = "SELECT COUNT(*) AS AnzahlBesucher FROM besucher";
@@ -50,13 +53,6 @@ $anzahlBesucher = $result->fetch_assoc()['AnzahlBesucher'];
 
 <?php
 
-// Alte Speisenzaehler
-//$speisenzaehler=0;
-//foreach ($meal as $gericht) {
-//    $speisenzaehler++;
-//}
-
-
 //Neuer Alterzähler
 $sql = "SELECT COUNT(*) AS AnzahlGericht FROM gericht";
 $result = $verbindung->query($sql);
@@ -73,7 +69,10 @@ $sql = "
     FROM gericht 
     ORDER BY name $sortOrder 
     LIMIT 5";
-$result = $verbindung->query($sql);
+//Schwachstelle
+$stmt = $verbindung->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
 
 $meals = [];
 if ($result->num_rows > 0) {
@@ -85,7 +84,7 @@ if ($result->num_rows > 0) {
 
 //Anzeige Gerichte mit Allergenen
 $sql = "
-    SELECT gericht.name, gericht.preisintern, gericht.preisextern, GROUP_CONCAT(allergen.name SEPARATOR ', ') AS Allergen
+    SELECT gericht.name, gericht.preisintern, gericht.preisextern, GROUP_CONCAT(allergen.code SEPARATOR ', ') AS Allergen
     FROM gericht 
     LEFT JOIN gericht_hat_allergen ON gericht.id = gericht_hat_allergen.gericht_id
     LEFT JOIN allergen ON gericht_hat_allergen.code = allergen.code
@@ -93,7 +92,10 @@ $sql = "
     ORDER BY name $sortOrder 
     LIMIT 5";
 
-$result = $verbindung->query($sql);
+// Schwachstelle
+$stmt = $verbindung->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
 $meals = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -164,13 +166,53 @@ if ($result->num_rows > 0) {
                             echo "<td>" . $meal["Allergen"] . "</td>";
                             echo "</tr>";
                     }
+
                     ?>
-
-
 
                     </tbody>
                 </table>
+                <p id = "allergenliste">Liste aller Allergene: </p>
+
+                <?php
+                $sql = "SELECT code, name FROM allergen;";
+                $result = mysqli_query($verbindung, $sql);
+
+                if ($result && mysqli_num_rows($result) > 0) {
+                    // Array für Allergene
+                    $allergene = [];
+
+                    // Wenn Allergene vorhanden sind, durchlaufen und in ein Array speichern
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $allergene[] = htmlspecialchars($row['code'].": ".$row['name']);
+                    }
+
+                    // Allergene nebeneinander ausgeben, getrennt durch Komma
+                    echo "<div id='allergenliste'>" . implode(', ', $allergene) . "</div>";
+                } else {
+                    echo "<div id='allergenliste'>Keine Allergene</div>";
+                }
+
+
+                mysqli_free_result($result);
+
+                $sql_zahl = "SELECT COUNT(*) AS anzahl_gerichte FROM gericht;";
+                $result_zahl = mysqli_query($verbindung, $sql_zahl);
+
+                // Abrufen der Anzahl der Gerichte
+                $anzahl_gerichte = 0; // Fallback-Wert
+                if ($result_zahl) {
+                    $row = mysqli_fetch_assoc($result_zahl);
+                    $anzahl_gerichte = $row['anzahl_gerichte'];
+                }
+                ?>
             </div>
+
+            <div id = wunschgerichte>
+                <h1>Neue Empfehlung für die Küche?</h1>
+                <a href="wunschgericht.php">Wunschgericht eintragen</a>
+            </div>
+
+
 
             <div class = "zahlen">
                 <h1 id="Zahlen">E-Mensa in Zahlen</h1>
@@ -180,6 +222,7 @@ if ($result->num_rows > 0) {
                     <li><?php echo $anzahlGerichte ?> Speisen </li>
                 </ul>
             </div>
+
 
             <div class="kontakt">
                 <h1 id="Kontakt">Interesse geweckt? Wir informieren Sie!</h1>

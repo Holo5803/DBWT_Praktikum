@@ -89,6 +89,7 @@ INSERT INTO `kategorie` (`id`, `eltern_id`, `name`, `bildname`) VALUES
 
 INSERT INTO `gericht_hat_kategorie` (`kategorie_id`, `gericht_id`) VALUES
 	(3, 1),	(3, 3),	(3, 4),	(3, 5),	(3, 6),	(3, 7),	(3, 9),	(4, 16), (4, 17), (4, 18), (5, 16), (5, 17), (5, 18);
+
 -- 2.4
 SELECT COUNT(*) AS Anzahl_Gerichte  FROM gericht;
 SELECT COUNT(*) AS Anzahl_Allergen FROM allergen;
@@ -226,4 +227,51 @@ ORDER BY AnzahlvonGericht ASC;
         ADD CONSTRAINT fk_kat_eltern FOREIGN KEY (eltern_id) REFERENCES kategorie(id)
             ON DELETE SET NULL
             ON UPDATE CASCADE;
+
+-- M4_3.6 SQL-Abfragen
+
+    -- a) Neueste 5 Einträge
+    SELECT  * FROM wunschgericht ORDER BY datum DESC LIMIT 5;
+
+    -- b) Anzahl der Wünsche pro Ersteller:in
+    SELECT ersteller.name AS ersteller_name, COUNT(wunschgericht.id) AS Anzahl_wunschgericht
+    FROM ersteller
+    LEFT JOIN wunschgericht ON ersteller.id = wunschgericht.ersteller_id
+    GROUP BY ersteller.name, ersteller_id
+    ORDER BY Anzahl_wunschgericht;
+
+-- M4_4
+
+    -- 4.1 Kombination aus Gericht und Kategorie einzigartig
+    ALTER TABLE gericht_hat_kategorie
+    ADD CONSTRAINT unique_gericht_kategorie UNIQUE (gericht_id, kategorie_id); -- Verhindert doppelte Zuordnungen derselben Kategorie zu einem Gericht
+
+    -- 4.2 Abfrage nach Namen in Tabelle gericht beschleunigen
+    ALTER TABLE gericht
+    ADD INDEX idx_name(name);
+
+    -- 4.3 Zugehörigen Zuordnungen zu einer Kategorie löschen
+    ALTER TABLE gericht_hat_kategorie
+    ADD CONSTRAINT fs_gericht_kategorie FOREIGN KEY (gericht_id) REFERENCES gericht(id) ON DELETE CASCADE;
+
+    -- Zugehörigen Zuordnungen zu Allergenen löschen
+    ALTER TABLE gericht_hat_allergen
+    ADD CONSTRAINT fs_gericht_allergenen FOREIGN KEY (gericht_id) REFERENCES gericht(id) ON DELETE CASCADE;
+
+    -- 4.4 Löschen von Kategorie, die keine Gerichte zugeordnet sind
+    ALTER TABLE gericht_hat_kategorie
+    ADD CONSTRAINT fs_kategorie_gericht FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE RESTRICT;
+
+    -- Löschen von Kategorie, die keine Kindkategorie besitzt
+    ALTER TABLE kategorie
+    ADD CONSTRAINT fs_kategorie_eltern FOREIGN KEY (eltern_id) REFERENCES kategorie(id) ON DELETE RESTRICT ;
+
+    -- 4.5 Automatische Aktualisierung von referenzierenden Datensätzen
+    ALTER TABLE gericht_hat_allergen
+    ADD CONSTRAINT fs_allergen FOREIGN KEY (code) REFERENCES allergen (code) ON UPDATE CASCADE;
+
+    -- 4.6 Kombination aus gericht_id und kategorie_id in gericht_hat_kategorie soll als Primärschlüssel dienen
+    ALTER TABLE gericht_hat_kategorie
+    DROP PRIMARY KEY,
+    ADD PRIMARY KEY (gericht_id, kategorie_id);
 

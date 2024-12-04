@@ -1,5 +1,5 @@
 
-# Praktikum DBWT M2
+# Praktikum DBWT M3
  
 Autoren:
 

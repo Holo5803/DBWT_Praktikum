@@ -154,3 +154,12 @@ body {
     background-repeat: no-repeat;
 
 }
+#allergenliste {
+    font-size: 8px;
+}
+a {
+    color: darkgreen;
+}
+a:hover {
+    color: black;
+}
