@@ -20,8 +20,10 @@ $dbname = "emensawerbeseite";
 $verbindung =  new mysqli($servername, $username, $password, $dbname);
 
 if ($verbindung->connect_error) {
-    die("Verbindung fehlgeschlagen: " . $verbindung->connect_error);
+    error_log("Datenbankverbindungsfehler: " . $verbindung->connect_error);
+    die("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.");
 }
+
 
 //Besucher zählen
 $sql = "INSERT INTO besucher () VALUES ()";
@@ -60,10 +62,13 @@ $anzahlGerichte = $result->fetch_assoc()['AnzahlGericht']; //Holt die nächste Z
 
 
 
-// Laden der Gerichte aus Datenbank
+// Whitelist für erlaubte Sortierparameter
+$allowedSortOrders = ['asc', 'desc'];
+// Standardwert für Sortierparameter, falls keiner übergeben wird
 $sortOrder = $_GET['sort'] ?? 'asc';
-$sortOrder = ($sortOrder == 'asc') ? 'asc' : 'desc';
-
+// Überprüfen, ob der Sortierparameter erlaubt ist, sonst auf Standardwert setzen
+$sortOrder = in_array(strtolower($sortOrder), $allowedSortOrders) ? strtolower($sortOrder) : 'asc';
+// SQL-Statement mit der geprüften Sortierreihenfolge
 $sql = "
     SELECT id, name, preisintern, preisextern 
     FROM gericht 
