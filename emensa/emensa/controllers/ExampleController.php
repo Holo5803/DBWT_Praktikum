@@ -36,4 +36,12 @@ class ExampleController
         return view('examples.m4_7c_gerichte',
             ['gerichte' => $gerichte]);
     }
+
+    public function m4_7d_layout (RequestData $rd) {
+        $seite = $rd->query["no"] ?? 1;
+        if (!($seite == 1 || $seite == 2)) {
+            $seite = 1;
+        }
+        return view ('examples.pages.m4_7d_page_'.htmlspecialchars($seite));
+    }
 }

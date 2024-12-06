@@ -10,11 +10,12 @@
     <title>Wunschgericht</title>
 </head>
 <body>
-    <h1>Wunschgericht Eingabe</h1>
-    <fieldset>
-    <form action ="wunschgericht.php" method="post">
+<h1>Wunschgericht Eingabe</h1>
+<fieldset>
+    <form action="wunschgericht.php" method="post">
         <label for="ersteller_name">Ihr Name: </label>
-        <input type="text" id="ersteller_name" name="ersteller_name" placeholder="Bitte geben Sie Ihren Name ein" ><br><br>
+        <input type="text" id="ersteller_name" name="ersteller_name"
+               placeholder="Bitte geben Sie Ihren Name ein"><br><br>
 
         <label for="email">Ihre E-Mail: </label>
         <input type="email" id="email" name="email" placeholder="Bitte geben Sie Ihre E-Mail ein" required><br><br>
@@ -26,8 +27,9 @@
         <textarea id="beschreibung" name="beschreibung" placeholder="Gerichtsbeschreibung" required></textarea><br><br>
 
         <button type="submit" name="submit">Wunsch abschicken</button>
-    </fieldset>
     </form>
+</fieldset>
+
 </body>
 </html>
 
