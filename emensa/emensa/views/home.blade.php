@@ -12,8 +12,16 @@
                 <li><a href="#Zahlen">Zahlen</a></li>
                 <li><a href="#Kontakt">Kontakt</a></li>
                 <li><a href="#W.F.U">Wichtig für uns</a></li>
+                <li><a href="{{ ('/admin/login') }}">Login</a></li>
+
             </ul>
         </nav>
+        @if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true)
+            <div style="position: absolute; top: 10px; right: 10px;">
+                Eingeloggt als {{ $_SESSION['admin'] }}
+                <a href="{{('/admin/logout') }}">Logout</a>
+            </div>
+        @endif
     </header>
 @endsection
 
