@@ -1,4 +1,8 @@
 <?php
+
+use Monolog\Level;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 const VERBOSITY = 0;
 const PUBLIC_DIRNAME = "public";
 const CONFIG_WEBROUTES = "/../routes/web.php"; // like in laravel
@@ -336,4 +340,16 @@ function assert_blade(): void
                 </div>");
         exit(1);
     }
+}
+
+function logger() : Logger
+{
+    $logger = new Logger('main');
+
+    $logFilePath =__DIR__ . '/../storage/logs/app.log' ;
+
+    $logger-> pushHandler(new StreamHandler($logFilePath, Logger::INFO));
+
+    return $logger;
+
 }

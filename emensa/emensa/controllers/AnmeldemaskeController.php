@@ -68,6 +68,10 @@ class AnmeldemaskeController
             $_SESSION['id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
 
+            $log = logger();
+
+            $log->info('Anmeldung abgeschlossen' , ['time' => date("Y-m-d H:i:s")]);
+
             //Transaktion commit
             $link->commit();
 
@@ -81,8 +85,12 @@ class AnmeldemaskeController
             }
 
             header('location: /anmeldung');
+            $log = logger();
+
+            $log->info('Fehlgeschlagenen Anmeldungen' , ['time' => date("Y-m-d H:i:s")]);
             exit();
         }
+
     }
 
     private function logFailedAttempt($email)
@@ -122,5 +130,9 @@ class AnmeldemaskeController
     {
         session_destroy();
         header('location: /');
+
+        $log = logger();
+
+        $log->info('Abmeldung abgeschlossen' , ['time' => date("Y-m-d H:i:s")]);
     }
 }

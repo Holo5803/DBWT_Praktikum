@@ -35,6 +35,10 @@ class HomeController
         $directory =  '../public/img/gerichte/';
         db_updateBildname($directory);
 
+        $log = logger();
+
+        $log->info('Main page accessed', ['time' => date('d.m.Y H:i:s')]);
+
 
         return view('home', [
             'rd' => $request,
