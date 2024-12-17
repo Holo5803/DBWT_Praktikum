@@ -7,6 +7,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../models/allergen.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../models/kategorie.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../helpers/CustomSessionHandler.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../models/newsletterAnmeldung.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../models/gerichtebilder.php';
 
 /* Datei: controllers/HomeController.php */
 
@@ -16,7 +17,7 @@ class HomeController
 
     public function __construct()
     {
-        session_start(); // Start PHP session
+//        session_start(); // Start PHP session
         $this->sessionHandler = new CustomSessionHandler();
     }
 
@@ -30,6 +31,9 @@ class HomeController
 
         $anzahlBesucher = getAnzahlBesucher();
         $confirmationMessage = $this->subscribe($request);
+
+        $directory =  '../public/img/gerichte/';
+        db_updateBildname($directory);
 
 
         return view('home', [

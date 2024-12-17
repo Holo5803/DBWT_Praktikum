@@ -84,7 +84,7 @@ function db_gerichtAllergen (string $sortOrder = 'asc'){
 
         //SQL-Statement vorbereiten und ausführen
         $sql  = "
-            SELECT gericht.name, gericht.preisintern, gericht.preisextern, GROUP_CONCAT(allergen.code SEPARATOR ', ') AS Allergen
+            SELECT gericht.name, gericht.preisintern, gericht.preisextern, gericht.bildname, GROUP_CONCAT(allergen.code SEPARATOR ', ') AS Allergen
             FROM gericht 
             LEFT JOIN gericht_hat_allergen ON gericht.id = gericht_hat_allergen.gericht_id
             LEFT JOIN allergen ON gericht_hat_allergen.code = allergen.code

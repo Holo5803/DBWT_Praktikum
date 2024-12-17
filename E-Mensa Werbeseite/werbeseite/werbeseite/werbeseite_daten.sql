@@ -275,3 +275,19 @@ ORDER BY AnzahlvonGericht ASC;
     DROP PRIMARY KEY,
     ADD PRIMARY KEY (gericht_id, kategorie_id);
 
+
+
+-- Meilenstein 5
+
+
+
+-- M5_1.3
+
+    INSERT INTO benutzer (name, email, passwort, admin, anzahlanmeldungen, anzahlfehler, letzteanmeldung, letzterfehler)
+    VALUES ('Admin', 'admin@emensa.example', '34b333978223b29fc9c0aca291cbbad25e0dfebfd298a9010fd1e1e388396c6b', 1,0, 0,NULL, NULL);
+
+-- M5_2.1
+    ALTER TABLE gericht
+    ADD `bildname` VARCHAR(200) DEFAULT NULL;
+-- M5_4a
+

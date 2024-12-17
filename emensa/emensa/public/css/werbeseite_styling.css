@@ -9,6 +9,18 @@ main {
     font-family: Arial, SansSerif;
 
 }
+.user_info {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color:#E4AE8A;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 
 header ul {
@@ -34,7 +46,7 @@ header li a {
 
 
 header li a:hover {
-    background-color: #111;
+    background-color: white;
 }
 
 

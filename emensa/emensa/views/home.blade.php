@@ -5,6 +5,7 @@
 
         <img src="/img/logo mensa.jpg" alt="">
 
+
         <nav>
             <ul>
                 <li><a href="#Ankuendigung">Ankündigung</a></li>
@@ -12,9 +13,21 @@
                 <li><a href="#Zahlen">Zahlen</a></li>
                 <li><a href="#Kontakt">Kontakt</a></li>
                 <li><a href="#W.F.U">Wichtig für uns</a></li>
+                @if (isset($_SESSION['email']))
+                    <div class="user_info">
+                        <p>Angemeldet als: {{$_SESSION['email']}}</p>
+                        <li><a href="/abmeldung">Abmelden</a></li>
+                        @else
+                            <p>Willkommen
+                                <li><a href="/anmelden">Anmelden</a></li>
+                            </p>
+                    </div>
+                @endif
+
             </ul>
         </nav>
     </header>
+
 @endsection
 
 @section('Gerichte')
@@ -32,6 +45,7 @@
                 <th>Preis intern</th>
                 <th>Preis extern</th>
                 <th>Allergene</th>
+                <th>Gerichts Fotos</th>
             </tr>
             </thead>
             <tbody>
@@ -41,6 +55,20 @@
                     <td>{{$meal["preisintern"]}}</td>
                     <td>{{$meal["preisextern"]}}</td>
                     <td>{{$meal["Allergen"]}}</td>
+                    <td>
+                        @if ($meal["bildname"] && file_exists('img/gerichte/' . $meal["bildname"]))
+                            <img src="{{'img/gerichte/' . $meal["bildname"]}}"
+                                 alt="{{$meal["bildname"]}}"
+                                 width="100"
+                                 height="100"
+                        @else
+                            <img src="img/gerichte/00_image_missing.jpg"
+                                 alt="Kein Bild verfügbar"
+                                 width="100"
+                                 height="100">
+                        @endif
+
+                    </td>
                 </tr>
             @endforeach
             </tbody>

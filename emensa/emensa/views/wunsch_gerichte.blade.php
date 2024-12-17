@@ -12,7 +12,7 @@
 <body>
 <h1>Wunschgericht Eingabe</h1>
 <fieldset>
-    <form action ="wunschgericht.php" method="post">
+    <form action ="/wunschgerichteConfirm" method="post">
         <label for="ersteller_name">Ihr Name: </label>
         <input type="text" id="ersteller_name" name="ersteller_name" placeholder="Bitte geben Sie Ihren Name ein" ><br><br>
 
@@ -27,6 +27,7 @@
 
         <button type="submit" name="submit">Wunsch abschicken</button>
     </form>
+    <div>{{$message}}</div>
 </fieldset>
 </body>
 </html>

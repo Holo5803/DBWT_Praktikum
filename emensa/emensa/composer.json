@@ -3,6 +3,7 @@
     "description": "routing script for module Datenbanken und Webtechnologien MVC",
     "license": "proprietary",
     "require": {
+        "monolog/monolog": "3.0.*",
         "eftec/bladeone": "^4.1",
         "ext-mysqli": "*",
       "ext-http": "*"

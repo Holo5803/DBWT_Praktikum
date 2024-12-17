@@ -35,7 +35,7 @@
  <?php echo $this->yieldContent('zahlen'); ?>
  <div id=wunschgerichte>
  <h1>Neue Empfehlung für die Küche?</h1>
- <a href="/werbeseite/wunschgericht.php">Wunschgericht eintragen</a>
+ <a href="/wunschgerichte">Wunschgericht eintragen</a>
  </div>
  <?php echo $this->yieldContent('kontakt'); ?>
  <?php echo $this->yieldContent('wichtig'); ?>

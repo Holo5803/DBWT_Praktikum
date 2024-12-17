@@ -14,6 +14,12 @@ return array(
     '/error'        => 'DemoController@error',
     '/requestdata'   => 'DemoController@requestdata',
     '/gerichte'     => 'HomeController@index',
+    '/wunschgerichte' => 'WunschgerichtController@index',
+    '/wunschgerichteConfirm' => 'WunschgerichtController@index2',
+    '/anmelden' => 'AnmeldemaskeController@indexAnmelden',
+    '/anmeldenConfirm' => 'AnmeldemaskeController@checkLogin',
+    '/anmeldung' => 'AnmeldemaskeController@indexAnmelden',
+    '/abmeldung' => 'AnmeldemaskeController@logout',
 
     // Erstes Beispiel:
     '/m4_6a_queryparameter' => 'ExampleController@m4_6a_queryparameter',
