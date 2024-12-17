@@ -37,18 +37,11 @@ class ExampleController
             ['gerichte' => $gerichte]);
     }
 
-    public function m4_7d_layout(RequestData $rd) {
-        $pageNumber = $rd->query['no'] ?? 1; // Standardseite ist Seite 1
-
-        if ($pageNumber == 1) {
-            return view('examples.pages.m4_7d_page_1', ['title' => 'Seite 1']);
-        } elseif ($pageNumber == 2) {
-            return view('examples.pages.m4_7d_page_2', ['title' => 'Seite 2']);
-        } else {
-            return view('examples.pages.m4_7d_page_1', ['title' => 'Seite 1']);
+    public function m4_7d_layout (RequestData $rd) {
+        $seite = $rd->query["no"] ?? 1;
+        if (!($seite == 1 || $seite == 2)) {
+            $seite = 1;
         }
+        return view ('examples.pages.m4_7d_page_'.htmlspecialchars($seite));
     }
-
-
-
 }

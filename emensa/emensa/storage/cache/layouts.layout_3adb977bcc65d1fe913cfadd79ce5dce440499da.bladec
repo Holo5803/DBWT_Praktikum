@@ -1,23 +1,46 @@
-<!doctype html>
-<html class="no-js" lang="DE">
+<!DOCTYPE html>
+<!--
+ - Praktikum DBWT. Autoren:
+ - Andreas, Hüpgen, 3679869
+ - Viet Minh Duc, Nguyen, 3659300
+ -->
+<html lang="de">
 <head>
- <meta charset="utf-8">
- <title>E-Mensa Routing Script</title>
- <meta name="description" content="unused">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="css/default.min.css">
- <?php echo $this->yieldContent("cssextra"); ?>
- <meta name="theme-color" content="#dadada">
- <!-- good developers check the markup ;) -->
+ <meta charset="UTF-8">
+ <title>Ihre E-Mensa</title>
+ <link href="/css/werbeseite_styling.css" rel="stylesheet">
 </head>
-<body>
-<div class="container">
- <div class="row">
- <?php echo $this->yieldContent("content"); ?>
+<body >
+
+<header>
+ <?php echo $this->yieldContent('header'); ?>
+</header>
+
+<main>
+ <div id="foto"><img src="/img/mensa foto.jpg" alt="Mensa Foto" class="center"></div>
+
+ <div class="ankuedigung">
+ <h1 id="Ankuendigung">Bald gibt es Essen auch online &#59;)</h1>
+ <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt rhoncus tortor, vel faucibus dui
+ rutrum vitae. Morbi vitae posuere justo. Cras lobortis sodales mattis. Suspendisse vulputate velit sapien,
+ et consectetur massa vulputate id. Praesent elementum elit ipsum, sed rutrum nulla sodales non. Nunc tempor
+ scelerisque ipsum, ut molestie justo condimentum sit amet. Cras et erat elit. Fusce volutpat finibus
+ condimentum. Quisque sodales porttitor nibh faucibus pretium. Duis lobortis nibh semper sem tempor faucibus.
+ Aliquam cursus, nisi nec consequat pulvinar, turpis odio ultricies lectus, sit amet vehicula massa orci in
+ nulla. Mauris mattis iaculis nulla vitae feugiat. Nunc sed laoreet lectus. Suspendisse laoreet tortor vitae
+ elit commodo auctor.</p>
  </div>
-</div>
 
-<?php echo $this->yieldContent("jsextra"); ?>
+ <?php echo $this->yieldContent('Gerichte'); ?>
+ <?php echo $this->yieldContent('zahlen'); ?>
+ <div id=wunschgerichte>
+ <h1>Neue Empfehlung für die Küche?</h1>
+ <a href="/wunschgerichte">Wunschgericht eintragen</a>
+ </div>
+ <?php echo $this->yieldContent('kontakt'); ?>
+ <?php echo $this->yieldContent('wichtig'); ?>
+ <footer>
+ <?php echo $this->yieldContent('footer'); ?>
+ </footer>
+</main>
 </body>
-
-</html>

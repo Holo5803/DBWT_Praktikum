@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="de">
+<!Doctype html>
+<html  lang="DE">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Seite' }}</title>
+    <meta charset="utf-8">
+    <title>@yield('title', 'standard Title')</title>
+
 </head>
 <body>
 <header>
-    @yield('header')
+    <h1>@yield('header')</h1>
 </header>
 
 <main>
@@ -18,4 +18,5 @@
     @yield('footer')
 </footer>
 </body>
+
 </html>

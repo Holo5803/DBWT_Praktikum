@@ -1,13 +1,13 @@
-@extends('layout.m4_7d_layout')
+@extends('examples.layout.m4_7d_layout')
 
 @section('header')
-    <h1>Seite 1</h1>
+    <h1>Header der Seite 1</h1>
 @endsection
 
 @section('main')
-    <p>Das ist die erste Seite.</p>
+    <p>Hier ist der Hauptinhalt der Seite 1.</p>
 @endsection
 
 @section('footer')
-    <p>Footer für Seite 1.</p>
+    <p>Footer der Seite 1. </p>
 @endsection

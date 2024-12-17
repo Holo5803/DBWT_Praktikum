@@ -1,9 +1,15 @@
 <?php
+
+use Monolog\Level;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 const VERBOSITY = 0;
 const PUBLIC_DIRNAME = "public";
 const CONFIG_WEBROUTES = "/../routes/web.php"; // like in laravel
 const CONFIG_DB = "/../config/db.php";
 const ROUTER_VERSION = '0.8.2';
+
+session_start();
 
 assert_php_version('8.2.0');
 assert_path();
@@ -334,4 +340,16 @@ function assert_blade(): void
                 </div>");
         exit(1);
     }
+}
+
+function logger() : Logger
+{
+    $logger = new Logger('main');
+
+    $logFilePath =__DIR__ . '/../storage/logs/app.log' ;
+
+    $logger-> pushHandler(new StreamHandler($logFilePath, Logger::INFO));
+
+    return $logger;
+
 }
