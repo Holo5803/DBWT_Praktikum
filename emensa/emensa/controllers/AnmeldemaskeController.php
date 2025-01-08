@@ -1,12 +1,15 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../beispiele/passwort.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../helpers/LoginException.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../models/anmeldemaske.php');
 
 
 class AnmeldemaskeController
 {
+    private $userAnmeldungen;
     public function indexAnmelden(RequestData $request)
     {
+        echo "<script>console.log('hier0' );</script>";
         $msg = $_SESSION['login_result_message'] ?? null;
         unset($_SESSION['login_result_message']);
         return view('anmeldung', [
@@ -14,9 +17,14 @@ class AnmeldemaskeController
             'msg' => $msg
         ]);
     }
+    public function __construct()
+    {
+        $this->userAnmeldungen = new Anmeldemaske();
+    }
 
     public function checkLogin(RequestData $request)
     {
+        echo "<script>console.log('hier1' );</script>";
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $email = $_POST['email'] ?? '';
             $passwort = $_POST['passwort'] ?? '';
@@ -33,53 +41,59 @@ class AnmeldemaskeController
             throw new LoginException($message);
         }
 
-        $link = connectdb();
-        $link->begin_transaction();
 
         try {
-            $sql = 'SELECT * FROM benutzer WHERE email  = ?';
-            $stmt = $link->prepare($sql);
-            $stmt->bind_param('s', $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $user = $result->fetch_assoc();
+            $this->userAnmeldungen->beginTransaction();
 
+            $user = $this->userAnmeldungen->getUserByEmail($email);
 
             if (!$user) {
-                $this->logFailedAttempt($email);
+                $this->userAnmeldungen->logFailedAttempt($email);
                 $message = "Ungültige Anmeldedaten";
-                $link->commit();
+                $this->userAnmeldungen->commit();
                 throw new LoginException($message);
             }
 
             //Passwort verifizieren
             $hashPassword = hash('sha256', mein_salz . $passwort);
             if ($hashPassword !== $user['passwort']) {
-                $this->incrementFailedLogin($user['id']);
+                $this->userAnmeldungen->incrementFailedLogin($user['id']);
                 $message = "Ungültige Anmeldedaten";
-                $link->commit();
+                $this->userAnmeldungen->commit();
+
                 throw new LoginException($message);
             }
 
             //Erfolgreich login:
-            $this->updateLoginDetails($user['id']);
+            $this->userAnmeldungen->updateLoginDetails($user['id']);
 
             //Speichern User Session
             $_SESSION['id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['admin'] = $user['admin'];
 
             $log = logger();
 
             $log->info('Anmeldung abgeschlossen' , ['time' => date("Y-m-d H:i:s")]);
 
             //Transaktion commit
-            $link->commit();
+            $this->userAnmeldungen->commit();
+
+            echo "<script>console.log('hier3 );</script>";
+
+            if (isset($_SESSION['redirect_nach_login'])){
+                echo "<script>console.log('hier4' );</script>";
+                $redirectUrl = $_SESSION['redirect_nach_login'] ?? '/';
+                unset($_SESSION['redirect_nach_login']); // Clear the session variable
+                header('Location: ' . $redirectUrl);
+                exit();
+            }
 
             header('location: /');
             exit();
         } catch (LoginException $e) {
             //Rollback zurück zu der Transaktion, falls es ein Fehler eintreten
-            $link->rollback();
+            $this->userAnmeldungen->rollback();
             if ($message !== "") {
                 $_SESSION['login_result_message'] = "Ein Fehler ist aufgetreten: " . $e->getMessage();
             }
@@ -93,38 +107,6 @@ class AnmeldemaskeController
 
     }
 
-    private function logFailedAttempt($email)
-    {
-        $link = connectdb();
-        $stmt = $link->prepare("UPDATE benutzer SET letzterfehler = ? WHERE email = ? ");
-        $currentTime = date("Y-m-d H:i:s");
-        $stmt->bind_param("ss", $currentTime, $email);
-        $stmt->execute();
-    }
-
-    private function incrementFailedLogin($userId)
-    {
-        $link = connectdb();
-        $stmt = $link->prepare("UPDATE benutzer SET anzahlfehler = anzahlfehler+1, letzterfehler = ? WHERE id = ? ");
-        $currentTime = date("Y-m-d H:i:s");
-        $stmt->bind_param("si", $currentTime, $userId);
-        $stmt->execute();
-    }
-
-    private function updateLoginDetails($userID)
-    {
-        $link = connectdb();
-//        $stmt = $link->prepare("UPDATE benutzer SET anzahlanmeldungen = anzahlanmeldungen+1, letzteanmeldung = ? WHERE id = ? ");
-//        $currentTime = date("Y-m-d H:i:s");
-//        $stmt->bind_param("si", $currentTime, $userID);
-//        $stmt->execute();
-
-        $stmt = $link->prepare("CALL benutzerAnzahlanmeldung_inkrement(?)");
-        if($stmt){
-            $stmt->bind_param("i", $userID);
-            $stmt->execute();
-        }
-    }
 
     public function logout()
     {

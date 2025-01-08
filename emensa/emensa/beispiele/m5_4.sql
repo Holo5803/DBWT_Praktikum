@@ -13,7 +13,7 @@ SELECT benutzer.id AS benutzer_id, benutzer.name, benutzer.email, benutzer.anzah
 FROM benutzer
 ORDER BY benutzer.anzahlanmeldungen DESC;
 
--- M5_5.3
+-- M5_4.3
 CREATE VIEW view_kategoriegerichte_vegetarisch AS
 SELECT kategorie.id   AS kategorie_id,
        kategorie.name AS kategorie_name,

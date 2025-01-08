@@ -3,5 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/emensa/beispiele/m5_4.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/emensa/beispiele/m5_5.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/emensa/beispiele/m6_a1.sql" dialect="MariaDB" />
   </component>
 </project>

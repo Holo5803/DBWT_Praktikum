@@ -32,6 +32,9 @@
  </div>
 
  <?php echo $this->yieldContent('Gerichte'); ?>
+ <?php echo $this->yieldContent('Highlight'); ?>
+ <?php echo $this->yieldContent('Bewertungen'); ?>
+ <?php echo $this->yieldContent('Meine Bewertungen'); ?>
  <?php echo $this->yieldContent('zahlen'); ?>
  <div id=wunschgerichte>
  <h1>Neue Empfehlung für die Küche?</h1>

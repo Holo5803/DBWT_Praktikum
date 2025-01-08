@@ -99,6 +99,13 @@ table, th, td {
 #meinetabelle {
     table-layout: auto;
 }
+#bewertungen {
+    table-layout: auto;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: #FAEBD6 ;
+}
 table td{
     text-align: center;
 }
@@ -174,4 +181,11 @@ a {
 }
 a:hover {
     color: black;
+}
+#löschen:hover {
+    color: red;
+}
+.highlighted {
+    background-color: #ffffcc;
+    font-weight: bold;
 }

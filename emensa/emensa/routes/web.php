@@ -20,6 +20,13 @@ return array(
     '/anmeldenConfirm' => 'AnmeldemaskeController@checkLogin',
     '/anmeldung' => 'AnmeldemaskeController@indexAnmelden',
     '/abmeldung' => 'AnmeldemaskeController@logout',
+    '/bewertung' => 'BewertungController@bewertungsForm',
+    '/bewertungSubmit' => 'BewertungController@bewertungFormSubmit',
+    '/bewertungen' => 'BewertungController@showBewertungen',
+    '/meinebewertungen' => 'BewertungController@meineBewertungen',
+    '/bewertungsloeschen' => 'BewertungController@deleteBewertungen',
+    '/bewertungenHervorheben' => 'BewertungController@toggleBewertung',
+
 
     // Erstes Beispiel:
     '/m4_6a_queryparameter' => 'ExampleController@m4_6a_queryparameter',

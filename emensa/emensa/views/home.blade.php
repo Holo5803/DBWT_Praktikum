@@ -30,6 +30,7 @@
 
 @endsection
 
+
 @section('Gerichte')
     <!-- Gerichte -->
     <div class="speisen">
@@ -46,6 +47,7 @@
                 <th>Preis extern</th>
                 <th>Allergene</th>
                 <th>Gerichts Fotos</th>
+                <th>Bewertungen</th>
             </tr>
             </thead>
             <tbody>
@@ -69,6 +71,11 @@
                         @endif
 
                     </td>
+
+                    <td><a href="/bewertung?gerichtid={{$meal["id"]}}">Bewertung abgeben</a></td>
+
+
+
                 </tr>
             @endforeach
             </tbody>
@@ -78,6 +85,47 @@
     </div>
 
 @endsection
+
+@section('Highlight')
+    <h1>Unsere Highlight</h1>
+    <table id="highlight">
+        <thead>
+        <tr>
+            <th>Gericht</th>
+            <th>Benutzer</th>
+            <th>Bemerkung</th>
+            <th>Sternebewertung</th>
+            <th>Bewertungszeitpunkt</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($highlights as $highlight)
+            <tr class="{{$highlight['hervorgehoben'] ? 'highlighted' : '' }}">
+                <td>{{$highlight['gericht_name']}}</td>
+                <td>{{$highlight['benutzer_name']}}</td>
+                <td>{{$highlight['bemerkung']}}</td>
+                <td>{{$highlight['sternbewertung']}}</td>
+                <td>{{$highlight['bewertungszeitpunkt']}}</td>
+
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection
+
+@section('Bewertungen')
+    <h1 id="Bewertung">Alle Bewertungen</h1>
+    <a href="/bewertungen">Hier anschauen</a>
+@endsection
+
+@section('Meine Bewertungen')
+    @if (isset($_SESSION['id']))
+        <h1 id="Bewertung">Deine Bewertungen</h1>
+        <a href="/meinebewertungen">Hier anschauen</a>
+    @endif
+
+@endsection
+
 
 @section('zahlen')
     <div class="zahlen">

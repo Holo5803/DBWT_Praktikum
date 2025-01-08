@@ -8,6 +8,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../models/kategorie.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../helpers/CustomSessionHandler.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../models/newsletterAnmeldung.php');
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../models/gerichtebilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../models/bewertungen.php';
+
 
 /* Datei: controllers/HomeController.php */
 
@@ -38,7 +40,7 @@ class HomeController
         $log = logger();
 
         $log->info('Main page accessed', ['time' => date('d.m.Y H:i:s')]);
-
+        $highlights = db_highlightAnzeigen();
 
         return view('home', [
             'rd' => $request,
@@ -47,6 +49,7 @@ class HomeController
             'anzahlGerichte' => $anzahlGerichte,
             'anzahlBesucher' => $anzahlBesucher,
             'allergenCode' => $allergenCode,
+            'highlights' => $highlights,
             'confirmationMessage' => $confirmationMessage
         ]);
 
@@ -83,4 +86,5 @@ class HomeController
     {
         return view('debug');
     }
+
 }

@@ -32,6 +32,9 @@
     </div>
 
     @yield('Gerichte')
+    @yield ('Highlight')
+    @yield('Bewertungen')
+    @yield('Meine Bewertungen')
     @yield('zahlen')
     <div id=wunschgerichte>
         <h1>Neue Empfehlung für die Küche?</h1>
